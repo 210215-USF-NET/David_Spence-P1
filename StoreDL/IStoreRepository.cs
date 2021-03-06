@@ -7,25 +7,26 @@ namespace StoreDL
     {
 //CUSTOMER***********************************************************
         Customer AddCustomer(Customer newCustomer);
-        List<Customer> GetCustomer();
+        List<Customer> GetCustomers();
         Customer GetCustomerByName(string name);
-        List<Order> GetCustomerOrderHistory(string name);
 //LOCATION***********************************************************
         List<Location> GetLocations();
-//ORDER***********************************************************
-        void AddOrder(Order newOrder);
+//ORDER************************************************************
+        Order AddOrder(Order newOrder);
         List<Order> GetOrders();
-        //List<Order> GetOrdersByCustomer(int CustomerId);
-        Order GetOrdersByCustomerId(int CustomerId);
-        List<Order> GetOrdersByLocation(string locationName);    
-
-        List<Inventory> GetInventories();    
+        List<Order> GetCustomerOrderHistory(int CustId);
+        List<Order> GetLocationOrderHistory(int locationId);
+//INVENTORY*********************************************************
+        List<Inventory> GetInventories();
+        void UpdateInventory(Inventory inv);
 //PRODUCT***********************************************************
         List<Product> GetProducts(); 
         Product GetProductById(int Id);
-        OrderItem AddItemToOrder(OrderItem newItem);
-
-        List<OrderItem> GetItems();
-        void AddItem(OrderItem newItem);
+//CART************************************************************
+        Cart AddCart(Cart newCart);
+        List<Cart> GetCarts();
+//OrderItem****************************************************
+        OrderItem AddOrderItem(OrderItem newOrderItem);
+        List<OrderItem> GetOrderItems();
     }
 }

@@ -5,26 +5,28 @@ namespace StoreBL
 {
     public interface IStoreBL
     {
-//CustomerBL***************************************************************
-        List<Customer> GetCustomer();
-        void AddCustomer(Customer newCustomer);
+        //CUSTOMER*********************************************************CUSTOMER
+        Customer AddCustomer(Customer newCustomer);
+        List<Customer> GetCustomers();
         Customer GetCustomerByName(string name);
-//LocationBL***************************************************************
+        //LOCATION*********************************************************LOCATION
         List<Location> GetLocations();
-//OrderBL******************************************************************
-        void AddOrder(Order newOrder);
+        //ORDER************************************************************ORDER
+        Order AddOrder(Order newOrder);
         List<Order> GetOrders();
-        List<Order> GetOrdersByLocation(string locationName);
-        Order GetOrdersByCustomerId(int customerId);
+        List<Order> GetCustomerOrderHistory(int custId);
+        List<Order> GetLocationOrderHistory(int locationId);
+        //INVENTORY*********************************************************INVENTORY
         List<Inventory> GetInventories();
-
-//ProductBL******************************************************************
+        void UpdateInventory(Inventory inv);
+        //PRODUCT***********************************************************PRODUCT
         List<Product> GetProducts();
-        Product GetProductById(int Id);
-        OrderItem AddItemToOrder(OrderItem newItem);
-
-        List<OrderItem> GetItems();
-
-        void AddItem(OrderItem newItem);
+        Product GetProductById(int id);
+        //CART**************************************************************CART
+        Cart AddCart(Cart newCart);
+        List<Cart> GetCarts();
+        //OrderItem********************************************************ORDERITEM
+        OrderItem AddOrderItem(OrderItem newOrderItem);
+        List<OrderItem> GetOrderItems();
     }
 }

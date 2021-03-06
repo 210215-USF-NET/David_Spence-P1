@@ -13,7 +13,6 @@ namespace StoreDL
         public StoreDBContext(DbContextOptions options) : base(options)
         {
         }
-
         protected StoreDBContext()
         {
         }
@@ -21,8 +20,8 @@ namespace StoreDL
         public DbSet<Product> Products { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<Cart> OrderItems { get; set; }
-        public DbSet<OrderItem> OrderItmes { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Inventory> Inventories { get; set; }
     }
 }

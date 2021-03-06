@@ -2,12 +2,26 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
+/*protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Hero>()
+                .Property(hero => hero.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<Hero>()
+                .HasOne(hero => hero.SuperPower)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+        }*/
 namespace StoreDL.Migrations
 {
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
