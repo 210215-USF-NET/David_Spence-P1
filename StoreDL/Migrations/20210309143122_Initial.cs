@@ -2,25 +2,27 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-/*protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Hero>()
-                .Property(hero => hero.Id)
-                .ValueGeneratedOnAdd();
-            modelBuilder.Entity<Hero>()
-                .HasOne(hero => hero.SuperPower)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-        }*/
 namespace StoreDL.Migrations
 {
     public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Carts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CustomerId = table.Column<int>(type: "integer", nullable: false),
+                    LocationId = table.Column<int>(type: "integer", nullable: false),
+                    ProductId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Carts", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Customers",
@@ -66,23 +68,7 @@ namespace StoreDL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Carts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CustomerId = table.Column<int>(type: "integer", nullable: false),
-                    LocationId = table.Column<int>(type: "integer", nullable: false),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Carts", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderItmes",
+                name: "OrderItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -93,7 +79,7 @@ namespace StoreDL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderItmes", x => x.Id);
+                    table.PrimaryKey("PK_OrderItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,6 +115,9 @@ namespace StoreDL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Carts");
+
+            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
@@ -139,9 +128,6 @@ namespace StoreDL.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderItems");
-
-            migrationBuilder.DropTable(
-                name: "OrderItmes");
 
             migrationBuilder.DropTable(
                 name: "Orders");

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StoreMVC.Models;
 using StoreBL;
-
+using Microsoft.AspNetCore.Http;
 
 namespace StoreMVC.Controllers
 {
@@ -35,7 +35,7 @@ namespace StoreMVC.Controllers
         // GET: CustomerController/Create
         public ActionResult Create()
         {
-            return View("CreateCustomer");
+            return View();
         }
 
         // POST: CustomerController/Create
@@ -63,11 +63,11 @@ namespace StoreMVC.Controllers
         {
             return View(_mapper.cast2CustomerEditVM(_storeBL.GetCustomerByName(name)));
         }
-    }
+
         // POST: CustomerController/Edit/5
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]*/
-        /*public ActionResult Edit(int id, IFormCollection collection)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -77,18 +77,19 @@ namespace StoreMVC.Controllers
             {
                 return View();
             }
-        }*/
+        }
 
         // GET: CustomerController/Delete/5
-        /* public ActionResult Delete(int id)
-         {
-             return View();
-         }
+        /*public ActionResult Delete(string name)
+        {
+            _storeBL.DeleteCustomer(_storeBL.GetCustomerByName(name));
+            return RedirectToAction(nameof(Index));
+        }
 
-         // POST: CustomerController/Delete/5
-         [HttpPost]
-         [ValidateAntiForgeryToken]*/
-        /*public ActionResult Delete(int id, IFormCollection collection)
+        // POST: CustomerController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
@@ -99,5 +100,7 @@ namespace StoreMVC.Controllers
                 return View();
             }
         }*/
+
     }
+}
     

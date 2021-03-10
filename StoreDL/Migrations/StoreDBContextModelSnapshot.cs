@@ -40,7 +40,7 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("StoreModels.Customer", b =>
@@ -139,7 +139,7 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderItmes");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("StoreModels.Product", b =>

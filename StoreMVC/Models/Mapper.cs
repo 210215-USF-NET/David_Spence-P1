@@ -19,7 +19,11 @@ namespace StoreMVC.Models
 
         public Customer cast2Customer(CustomerEditVM customer2BCasted)
         {
-            throw new NotImplementedException();
+            return new Customer
+            {
+                Name = customer2BCasted.Name,
+                Phone = customer2BCasted.Phone
+            };
         }
 
         public CustomerCRVM cast2CustomerCRVM(Customer customer)
@@ -31,14 +35,14 @@ namespace StoreMVC.Models
             };
         }
 
-        /*public CustomerEditVM cast2CustomerEditVM(Customer customer)
+        public CustomerEditVM cast2CustomerEditVM(Customer customer)
         {
             return new CustomerEditVM
             {
                 Name = customer.Name,
                 Phone = customer.Phone
             };
-        }*/
+        }
 
         public CustomerIndexVM cast2CustomerIndexVM(Customer customer2BCasted)
         {

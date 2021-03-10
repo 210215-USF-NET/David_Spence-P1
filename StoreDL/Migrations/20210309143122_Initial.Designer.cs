@@ -10,7 +10,7 @@ using StoreDL;
 namespace StoreDL.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    [Migration("20210305055947_Initial")]
+    [Migration("20210309143122_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("StoreModels.Customer", b =>
@@ -141,7 +141,7 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("OrderItmes");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("StoreModels.Product", b =>
