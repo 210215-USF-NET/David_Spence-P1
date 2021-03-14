@@ -10,6 +10,7 @@
         body {
             background-color: lightseagreen;
         }
+
     </style>
     
 </head>
@@ -31,7 +32,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customer List</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Location" asp-action="Index">Locations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
                         </li>
                     </ul>
                 </div>
@@ -40,7 +47,10 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @RenderBody()
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Fake_fruit.png" style="display: block; margin-left: auto; margin-right: auto; height:30%; width:30%">
+
+            @*            <img src="http://upload.wikimedia.org/wikipedia/commons/e/e5/Post-it-note-transparent.png" style="display: block; margin-left: auto; margin-right: auto; height:30%; width:30%">
+            *@            @RenderBody()
         </main>
     </div>
 

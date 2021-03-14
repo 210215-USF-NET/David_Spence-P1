@@ -16,7 +16,6 @@ namespace StoreMVC.Models
                 Phone = customer2aBCasted.Phone
             };
         }
-
         public Customer cast2Customer(CustomerEditVM customer2BCasted)
         {
             return new Customer
@@ -25,7 +24,6 @@ namespace StoreMVC.Models
                 Phone = customer2BCasted.Phone
             };
         }
-
         public CustomerCRVM cast2CustomerCRVM(Customer customer)
         {
             return new CustomerCRVM
@@ -34,7 +32,6 @@ namespace StoreMVC.Models
                 Phone = customer.Phone
             };
         }
-
         public CustomerEditVM cast2CustomerEditVM(Customer customer)
         {
             return new CustomerEditVM
@@ -43,13 +40,29 @@ namespace StoreMVC.Models
                 Phone = customer.Phone
             };
         }
-
         public CustomerIndexVM cast2CustomerIndexVM(Customer customer2BCasted)
         {
             return new CustomerIndexVM
             {
                 Name = customer2BCasted.Name,
                 Phone = customer2BCasted.Phone
+            };
+        }
+        public LocationIndexVM cast2LocationIndexVM(Location location2BCasted)
+        {
+            return new LocationIndexVM
+            {
+                Name = location2BCasted.Name,
+                City = location2BCasted.City
+            };
+        }
+
+        public ProductIndexVM cast2ProductIndexVM(Product product2BCasted)
+        {
+            return new ProductIndexVM
+            {
+                Name = product2BCasted.Name,
+                Price = product2BCasted.Price
             };
         }
     }

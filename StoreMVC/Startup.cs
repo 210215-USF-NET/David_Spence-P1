@@ -32,6 +32,16 @@ namespace StoreMVC
             services.AddScoped<IStoreRepository, StoreRepoDB>();
             services.AddScoped<IStoreBL, StoreBL.StoreBL>();
             services.AddScoped<IMapper, Mapper>();
+            services.AddSession();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(5);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +63,10 @@ namespace StoreMVC
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
+            //app.UseHttpContextItemsMiddleware();
+            //app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {

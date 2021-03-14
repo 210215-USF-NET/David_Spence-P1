@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using StoreMVC.Models;
 using StoreBL;
 using Microsoft.AspNetCore.Http;
+using StoreModels;
 
 namespace StoreMVC.Controllers
 {
@@ -20,10 +21,28 @@ namespace StoreMVC.Controllers
             _storeBL = storeBL;
             _mapper = mapper;
         }
-        // GET: CustomerController
+/*        // GET: CustomerController
         public ActionResult Index()
         {
             return View(_storeBL.GetCustomers().Select(customer => _mapper.cast2CustomerIndexVM(customer)).ToList());
+        }*/
+
+        public ActionResult Index(string search)
+        {
+            if (search != null)
+            {
+                List<Customer> custList = _storeBL.GetCustomers().Select(cust => (cust)).ToList();
+                foreach (var item in custList)
+                {
+                    if (item.Name.ToString() == search)
+                    {
+                        List<CustomerIndexVM> list = new List<CustomerIndexVM>();
+                        list.Add(_mapper.cast2CustomerIndexVM(item));
+                        return View(list);
+                    }
+                }
+            }
+            return View(_storeBL.GetCustomers().Select(cust => _mapper.cast2CustomerIndexVM(cust)).ToList());
         }
 
         // GET: CustomerController/Details/5

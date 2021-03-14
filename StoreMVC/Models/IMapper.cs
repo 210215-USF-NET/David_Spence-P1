@@ -9,5 +9,9 @@ namespace StoreMVC.Models
         CustomerCRVM cast2CustomerCRVM(Customer customer);
         CustomerEditVM cast2CustomerEditVM(Customer customer);
         Customer cast2Customer(CustomerEditVM customer2BCasted);
+        LocationIndexVM cast2LocationIndexVM(Location location2BCasted);
+        ProductIndexVM cast2ProductIndexVM(Product product2BCasted);
+
+
     }
 }
