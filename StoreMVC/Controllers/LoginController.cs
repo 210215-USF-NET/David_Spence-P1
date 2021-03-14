@@ -1,44 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
-using System;
-using Microsoft.AspNetCore.Http;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StoreMVC.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly ILogger<LoginController> _logger;
-
-        public LoginController(ILogger<LoginController> logger)
-        {
-            _logger = logger;
-        }
-        public IActionResult Login()
-        {
-            ViewBag.Name = "";
-            var ses = this.HttpContext.Session;
-            String user = ses.GetString("user");
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult perform(IFormCollection collection)
-        {
-            var ses = this.HttpContext.Session;
-            ses.SetString("user", Request.Form["ListItem"].ToString());
-
-
-            return RedirectToAction("Login", "Login");
-
-        }
-
-
         // GET: LoginController
         public ActionResult Index()
         {

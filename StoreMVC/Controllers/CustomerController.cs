@@ -98,6 +98,28 @@ namespace StoreMVC.Controllers
             }
         }
 
+        public ActionResult LoginPage()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(CustomerCRVM customerVM)
+        {
+            if (ModelState.IsValid)
+            {
+                Customer customer = _storeBL.GetCustomerByName(customerVM.Name);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+                HttpContext.Session.SetString("Name", customer.Name);
+                HttpContext.Session.SetInt32("Id", customer.Id);
+                return Redirect("/");
+            }
+            return BadRequest("Invalid model state");
+        }
+
         // GET: CustomerController/Delete/5
         /*public ActionResult Delete(string name)
         {

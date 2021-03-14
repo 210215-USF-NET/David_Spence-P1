@@ -14,14 +14,33 @@
         <div class="text-center">
             <h1 class="display-4">Welcome to the Plastic Fruit Store</h1>
             <a asp-controller="Customer" asp-action="Create">New Customer?</a>
-            @using (Html.BeginForm("perform", "Login", FormMethod.Post))
-            {
-                <label for="Name">Customr Login:</label><br>
-                <input type="text" id="Name" name="Name" value='@ViewData["Name"]'><br>
-                <input type="submit" />
-            }
-           
-                         
+
+            @*<form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-fontrol" />
+                    <span asp-validation-for="Name" class=" text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </div>
+            </form>*@
+
+
+
+
+
+
+
+            @*@using (Html.BeginForm("perform", "Login", FormMethod.Post))
+        {
+            <label for="Name">Customr Login:</label><br>
+            <input type="text" id="Name" name="Name" value='@ViewData["Name"]'><br>
+            <input type="submit" />
+        }*@
+
+
             <!--
                         Customer foundCustomer = storeBL.GetCustomerByName(Console.ReadLine());
 
