@@ -29,4 +29,4 @@ steps:
     command: 'publish'
     publishWebProjects: true
     zipAfterPublish: true
-    workingDirectory: '/'
+    workingDirectory: '**/StoreMVC/*.csproj'
