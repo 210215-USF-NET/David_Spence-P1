@@ -28,3 +28,11 @@ steps:
     publishWebProjects: true
     zipAfterPublish: true
     workingDirectory: '**/StoreMVC/*.csproj'
+    
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(a4a321cb-975f-4fa4-9a69-02f8d84f45f5)'
+    appType: 'webApp'
+    WebAppName: 'PlasticFruitStore'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
