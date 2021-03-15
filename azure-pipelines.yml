@@ -17,11 +17,13 @@ variables:
 steps:
 
 - task: DotNetCoreCLI@2
+  displayName: build
   inputs:
     command: 'build'
 
     
 - task: DotNetCoreCLI@2
+  displayName: publish
   inputs:
     command: 'publish'
     zipAfterPublish: true
@@ -29,6 +31,7 @@ steps:
     
     
 - task: AzureRmWebAppDeployment@4
+  displayName: deploy
   inputs:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(a4a321cb-975f-4fa4-9a69-02f8d84f45f5)'
