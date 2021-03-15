@@ -21,17 +21,17 @@ namespace StoreMVC.Controllers
             _storeBL = storeBL;
             _mapper = mapper;
         }
-/*        // GET: CustomerController
+        // GET: CustomerController
         public ActionResult Index()
         {
             return View(_storeBL.GetCustomers().Select(customer => _mapper.cast2CustomerIndexVM(customer)).ToList());
-        }*/
+        }
 
         public ActionResult Index(string search)
         {
             if (search != null)
             {
-                List<Customer> custList = _storeBL.GetCustomers().Select(cust => (cust)).ToList();
+                List<Customer> custList = _storeBL.GetCustomers().Select(customer => (customer)).ToList();
                 foreach (var item in custList)
                 {
                     if (item.Name.ToString() == search)
@@ -42,7 +42,7 @@ namespace StoreMVC.Controllers
                     }
                 }
             }
-            return View(_storeBL.GetCustomers().Select(cust => _mapper.cast2CustomerIndexVM(cust)).ToList());
+            return View(_storeBL.GetCustomers().Select(customer => _mapper.cast2CustomerIndexVM(customer)).ToList());
         }
 
         // GET: CustomerController/Details/5
