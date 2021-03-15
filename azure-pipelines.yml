@@ -15,18 +15,26 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - task: DotNetCoreCLI@2
+  displayName: build
   inputs:
     command: 'build'
-    projects: '**/*.sln'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '**/StoreTests/*.csproj'
+
     
 - task: DotNetCoreCLI@2
+  displayName: publish
   inputs:
     command: 'publish'
-    publishWebProjects: false
     zipAfterPublish: true
-    workingDirectory: '**/StoreMVC/*.csproj'
+    publishWebProjects: true
+    
+    
+- task: AzureRmWebAppDeployment@4
+  displayName: deploy
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(a4a321cb-975f-4fa4-9a69-02f8d84f45f5)'
+    appType: 'webApp'
+    WebAppName: 'PlasticFruitStore'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
