@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-page">
+    @*<form>
+            <label for="Name">Enter Your Name</label>
+            <input type="text" name="Name" class="form-control">
+
+            <button class="btn btn-primary sMargin" type="submit" asp-controller="Customer" asp-action="Login">Login</button>
+
+        </form>*@
+    <form>
+        <label for="CName">Choose a location:</label>
+        <select id="CName" name="CName">
+            <option value="David Spence">David Spence</option>
+            <option value="Jesse Turcotte">Jesse Turcotte</option>
+
+        </select>
+        <input type="submit" asp-controller="Customer" asp-action="Login">
+    </form>
+    <a asp-controller="Customer" asp-action="Create">New Customer?</a>
+
+</div>

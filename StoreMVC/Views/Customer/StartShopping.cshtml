@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StoreModels;
+@using System.Text.Json;
+@using Microsoft.AspNetCore.Http;
+@model IEnumerable<StoreMVC.Models.LocationIndexVM>
+
+
+    @{
+        ViewData["Title"] = "StartShopping";
+@*        Location location = JsonSerializer.Deserialize<Customer>(Context.Session.GetString("locationData"));
+*@    }
+
+    <h1>Start Shopping!</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+        </thead>
+    </table>

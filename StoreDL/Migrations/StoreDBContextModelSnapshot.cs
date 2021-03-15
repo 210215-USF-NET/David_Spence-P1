@@ -40,6 +40,12 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ProductId");
+
                     b.ToTable("Carts");
                 });
 
@@ -79,6 +85,10 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("LocationId");
+
+                    b.HasIndex("ProductId");
+
                     b.ToTable("Inventories");
                 });
 
@@ -116,7 +126,14 @@ namespace StoreDL.Migrations
                     b.Property<int>("LocationId")
                         .HasColumnType("integer");
 
+                    b.Property<double>("Price")
+                        .HasColumnType("double precision");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Orders");
                 });
@@ -139,6 +156,8 @@ namespace StoreDL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("OrderItems");
                 });
 
@@ -158,6 +177,90 @@ namespace StoreDL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("StoreModels.Cart", b =>
+                {
+                    b.HasOne("StoreModels.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreModels.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreModels.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Location");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("StoreModels.Inventory", b =>
+                {
+                    b.HasOne("StoreModels.Location", null)
+                        .WithMany("Inventory")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreModels.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("StoreModels.Order", b =>
+                {
+                    b.HasOne("StoreModels.Customer", "Customer")
+                        .WithMany("OrderHistory")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StoreModels.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("StoreModels.OrderItem", b =>
+                {
+                    b.HasOne("StoreModels.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("StoreModels.Customer", b =>
+                {
+                    b.Navigation("OrderHistory");
+                });
+
+            modelBuilder.Entity("StoreModels.Location", b =>
+                {
+                    b.Navigation("Inventory");
                 });
 #pragma warning restore 612, 618
         }

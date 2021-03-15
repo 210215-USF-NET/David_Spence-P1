@@ -29,6 +29,30 @@ namespace StoreDL
             modelBuilder.Entity<Customer>()
                 .Property(customer => customer.Id)
                 .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Product>()
+                .Property(product => product.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Location>()
+                .Property(location => location.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Order>()
+                .Property(order => order.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Cart>()
+                .Property(cart => cart.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<OrderItem>()
+                .Property(orderItem => orderItem.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Inventory>()
+                .Property(inventory => inventory.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

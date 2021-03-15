@@ -1,4 +1,5 @@
 using System;
+using Serilog;
 
 namespace StoreModels
 {
@@ -9,7 +10,14 @@ namespace StoreModels
         public int Quantity { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
-        public override string ToString() => $"Quantity: {this.Quantity}";
+        public Product Product { get; set; }
 
+        private void ThrowNullException()
+        {
+            Log.Logger = new LoggerConfiguration().WriteTo.File("../Logs/Logs.json").CreateLogger();
+            Log.Error("Null value of OrderItem.");
+
+            throw new Exception("Value is Null");
+        }
     }
 }

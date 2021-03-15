@@ -43,7 +43,11 @@ namespace StoreBL
         {
             return _repo.GetCustomerOrderHistory(custId);
         }
-        public List<Order> GetLocationOrderHistory(int locationId)
+        List<Order> GetCustomerOrderHistory(string custName)
+        {
+            return _repo.GetCustomerOrderHistory(custName);
+        }
+    public List<Order> GetLocationOrderHistory(int locationId)
         {
             return _repo.GetLocationOrderHistory(locationId);
         }
@@ -55,6 +59,10 @@ namespace StoreBL
         public void UpdateInventory(Inventory inv)
         {
             _repo.UpdateInventory(inv);
+        }
+        public Inventory AddToCart(Inventory inv, Customer customer, int quantity)
+        {
+            return _repo.AddToCart(inv, customer, quantity);
         }
         //PRODUCT***********************************************************PRODUCT
         public List<Product> GetProducts()
@@ -83,5 +91,10 @@ namespace StoreBL
         {
             return _repo.GetOrderItems();
         }
+
+        List<Order> IStoreBL.GetCustomerOrderHistory(string custName)
+        {
+            return _repo.GetCustomerOrderHistory(custName);
+        }        
     }
 }

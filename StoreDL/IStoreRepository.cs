@@ -15,10 +15,12 @@ namespace StoreDL
         Order AddOrder(Order newOrder);
         List<Order> GetOrders();
         List<Order> GetCustomerOrderHistory(int CustId);
+        List<Order> GetCustomerOrderHistory(string CustName);
         List<Order> GetLocationOrderHistory(int locationId);
 //INVENTORY*********************************************************
         List<Inventory> GetInventories();
         void UpdateInventory(Inventory inv);
+        Inventory AddToCart(Inventory inv, Customer customer, int quantity);
 //PRODUCT***********************************************************
         List<Product> GetProducts(); 
         Product GetProductById(int Id);

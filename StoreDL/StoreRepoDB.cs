@@ -40,7 +40,7 @@ namespace StoreDL
         {
             return _context.Locations
                 .AsNoTracking()
-                .Select(Location => Location)
+                .Select(location => location)
                 .ToList();
         }
         //ORDER***********************************************************ORDER
@@ -64,6 +64,13 @@ namespace StoreDL
                 .Select(order => order)
                 .ToList();
         }
+        public List<Order> GetCustomerOrderHistory(string CustName)
+        {
+            return _context.Orders
+                .AsNoTracking()
+                .Select(order => order)
+                .ToList();
+        }
         public List<Order> GetLocationOrderHistory(int locationId)
         {
             return _context.Orders
@@ -80,6 +87,21 @@ namespace StoreDL
                 .ToList();
         }
         public void UpdateInventory(Inventory inv) { }
+
+        public Inventory AddToCart(Inventory inv, Customer customer, int quantity)
+        {
+            _context.Carts.Add(new Cart
+            {
+                CustomerId = customer.Id,
+                LocationId = inv.LocationId,
+                ProductId = inv.ProductId,
+                Quantity = quantity
+            });
+
+            _context.SaveChanges();
+
+            return inv;
+        }
         //PRODUCT***********************************************************PRODUCT
         public List<Product> GetProducts()
         {
@@ -124,6 +146,6 @@ namespace StoreDL
                 .ToList();
         }
 
-
+        
     }
 }

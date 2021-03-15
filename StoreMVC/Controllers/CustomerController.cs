@@ -9,6 +9,9 @@ using StoreMVC.Models;
 using StoreBL;
 using Microsoft.AspNetCore.Http;
 using StoreModels;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace StoreMVC.Controllers
 {
@@ -16,6 +19,8 @@ namespace StoreMVC.Controllers
     {
         private IStoreBL _storeBL;
         private IMapper _mapper;
+        private Customer _customer;
+        private Location _location;
         public CustomerController(IStoreBL storeBL, IMapper mapper)
         {
             _storeBL = storeBL;
@@ -98,49 +103,52 @@ namespace StoreMVC.Controllers
             }
         }
 
-        public ActionResult LoginPage()
+        [HttpPost]
+        public ActionResult CustomerLoggedIn()
         {
+            ViewBag.Message = HttpContext.Session.GetString("customerName");
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Login(CustomerCRVM customerVM)
+        public ActionResult Login(string CName)
         {
-            if (ModelState.IsValid)
+            List<Customer> custList = _storeBL.GetCustomers().Select(customer => (customer)).ToList();
+            foreach (var item in custList)
             {
-                Customer customer = _storeBL.GetCustomerByName(customerVM.Name);
-                if (customer == null)
+                if (item.Name.ToString() == CName)
                 {
-                    return NotFound();
+                    _customer = item;
+                    HttpContext.Session.SetString("customerData", JsonSerializer.Serialize(_customer));
+                    HttpContext.Session.SetString("customerName", CName);
+                    return View("CustomerLoggedIn");
                 }
-                HttpContext.Session.SetString("Name", customer.Name);
-                HttpContext.Session.SetInt32("Id", customer.Id);
-                return Redirect("/");
-            }
-            return BadRequest("Invalid model state");
+            }       
+                return View("Create");
         }
 
-        // GET: CustomerController/Delete/5
-        /*public ActionResult Delete(string name)
+        public ActionResult StoreSelect(string LName)
         {
-            _storeBL.DeleteCustomer(_storeBL.GetCustomerByName(name));
-            return RedirectToAction(nameof(Index));
+            List<Location> locList = _storeBL.GetLocations().Select(location => (location)).ToList();
+            foreach (var item in locList)
+            {
+                if (item.Name.ToString() == LName)
+                {
+                    _location = item;
+                    HttpContext.Session.SetString("locationData", JsonSerializer.Serialize(_location));
+                    HttpContext.Session.SetString("locationName", LName);
+                    return View("StartShopping");
+                }
+            }
+            return View("CustomerLoggedIn");
         }
 
-        // POST: CustomerController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult StartShopping()
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }*/
+            _location.Inventory = _storeBL.GetInventories().Where(inv => inv.LocationId == _location.Id).ToList();
+            
+
+            return View();
+        }
 
     }
 }
