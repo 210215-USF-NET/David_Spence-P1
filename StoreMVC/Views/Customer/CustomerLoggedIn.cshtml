@@ -13,22 +13,21 @@
         Customer customer = JsonSerializer.Deserialize<Customer>(Context.Session.GetString("customerData"));
     }
 
-    <h1>This is the login page</h1>
-    @*<p>Select the location that you'd like to shop at</p>*@
+    <h1>You're Logged In</h1>
+    <p>Select the location that you'd like to shop at</p>
 
-    <form>
-            <label for="LName">Choose a location:</label>
-            <select id="LName" name="LName">
-                <option value="Ye Olde Fruit Shoppe">Ye Olde Fruit Shoppe</option>
-                <option value="Fruit Town">Fruit Town</option>
-            </select>
-            <input type="submit" asp-controller="Customer" asp-action="StoreSelect">
-        </form>
+@*<form>*@
+<form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" method="post" asp-action="StartShopping">
+    <input type="hidden" name="store" id="storeToPass" value="" />
+    <div><button class="card shadow-sm" type="submit" onclick="send(2)">Fruit Town - Chattanooga, TN </button></div><br />
+    <div><button class="card shadow-sm" type="submit" onclick="send(2)">Ye Olde Fruit Shoppe - Charleston, SC </button></div>
 
+</form>
 
 
 
-    <table class="table">
+
+    <!--<table class="table">
         <thead>
             <tr>
                 <th>
@@ -47,27 +46,32 @@
                 </td>
                 <td>
                     Charleston, SC
-                </td>
+                </td>-->
                 @*<td>
                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     </td>*@
-            </tr>
+            <!--</tr>
             <tr>
                 <td>
                     Fruit Town
                 </td>
                 <td>
                     Chattanooga, TN
-                </td>
+                </td>-->
                 @*<td>
                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                     </td>*@
-            </tr>
+            <!--</tr>
 
         </tbody>
-    </table>
+    </table>-->
+    <script>
+        function send(value) {
+            document.getElementById("storeToPass").value = value
+        }
+    </script>
 
     <!--
     <main class="container">

@@ -106,7 +106,7 @@ namespace StoreMVC.Controllers
         [HttpPost]
         public ActionResult CustomerLoggedIn()
         {
-            ViewBag.Message = HttpContext.Session.GetString("customerName");
+            /*ViewBag.Message = HttpContext.Session.GetString("customerName");*/
             return View();
         }
 
@@ -126,7 +126,7 @@ namespace StoreMVC.Controllers
                 return View("Create");
         }
 
-        public ActionResult StoreSelect(string LName)
+        /*public ActionResult StoreSelect(string LName)
         {
             List<Location> locList = _storeBL.GetLocations().Select(location => (location)).ToList();
             foreach (var item in locList)
@@ -136,18 +136,56 @@ namespace StoreMVC.Controllers
                     _location = item;
                     HttpContext.Session.SetString("locationData", JsonSerializer.Serialize(_location));
                     HttpContext.Session.SetString("locationName", LName);
+                    _location.Inventory = _storeBL.GetInventories().Where(inv => inv.LocationId == _location.Id).ToList();
                     return View("StartShopping");
                 }
             }
             return View("CustomerLoggedIn");
-        }
+        }*/
 
-        public ActionResult StartShopping()
+        /*public ActionResult StartShopping(string LName)
         {
-            _location.Inventory = _storeBL.GetInventories().Where(inv => inv.LocationId == _location.Id).ToList();
-            
+            List<Location> locList = _storeBL.GetLocations().Select(location => (location)).ToList();
+            foreach (var item in locList)
+            {
+                if (item.Name.ToString() == LName)
+                {
+                    _location = item;
+                    HttpContext.Session.SetString("locationData", JsonSerializer.Serialize(_location));
+                    HttpContext.Session.SetString("locationName", LName);
+                    _location.Inventory = _storeBL.GetInventories().Where(inv => inv.LocationId == _location.Id).ToList();
+                    return View();
+                }
+            }
+
 
             return View();
+        }*/
+        [HttpPost]
+        public ActionResult StartShopping(string store)
+        {
+            _location = _storeBL.GetLocations().FirstOrDefault(l => l.Id == int.Parse(store));
+            _location.Inventory = _storeBL.GetInventories().Where(i => i.LocationId == _location.Id).ToList();
+            HttpContext.Session.SetString("storeSelection", JsonSerializer.Serialize(_location));
+
+            return View();
+        }
+
+        public ActionResult AddToCart(int quantity, string cartProduct)
+        {
+            _customer = JsonSerializer.Deserialize<Customer>(HttpContext.Session.GetString("customerData"));
+            _location = JsonSerializer.Deserialize<Location>(HttpContext.Session.GetString("storeSelection"));
+
+            Inventory selectedInventory = _storeBL.GetInventories()
+                .FirstOrDefault(p =>
+                p.ProductId == int.Parse(cartProduct)
+                && p.LocationId == _location.Id);
+
+            _storeBL.AddToCart(selectedInventory, _customer, quantity);
+
+            /*_storeBL.RemoveInventory(selectedInventory, quantity);*/
+
+            return View("ProductView");
         }
 
     }

@@ -5,14 +5,46 @@
 @model IEnumerable<StoreMVC.Models.LocationIndexVM>
 
 
-    @{
-        ViewData["Title"] = "StartShopping";
-@*        Location location = JsonSerializer.Deserialize<Customer>(Context.Session.GetString("locationData"));
-*@    }
 
-    <h1>Start Shopping!</h1>
+@{
+    ViewData["Title"] = "StartShopping";
+    Location location = JsonSerializer.Deserialize<Location>(Context.Session.GetString("storeSelection"));
+}
 
-    <table>
+<h1>Start Shopping!</h1>
+
+<form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" asp-action="AddToCart">
+    <input type="hidden" name="cartProduct" id="ProductForCart" value="" />
+    @foreach (Inventory i in location.Inventory)
+    {
+        <div class="col">
+            
+                <div>@i.Product.Name</div>
+               
+                    
+                    <p>@i.Product.Price</p>
+                    <div>
+                        <small class="stock">Stock: @i.Quantity</small>
+                        <div>
+                            <input type="number" name="quantity" id="addCount">
+                                
+                            </input>
+                            <button type="submit"  onclick="cartSubmit(@i.ProductId)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+    }
+</form>
+    </div>
+</div>
+
+<script>
+    function cartSubmit(value) {
+        document.getElementById("ProductForCart").value = value
+    }
+</script>
+
+@*<table>
         <thead>
             <tr>
                 <th>
@@ -26,4 +58,19 @@
                 </th>
             </tr>
         </thead>
+        <tbody>
+           @foreach (Inventory inv in location.Inventory)
+            {
+                <tr>
+                    <td>
+                        @inv.Product.Name
+                    </td>
+                    <td>
+                        inv.Product.Price
+                    </td>
+
+                </tr>
+            }
+        </tbody>
     </table>
+        </table>*@

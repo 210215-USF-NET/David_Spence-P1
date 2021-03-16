@@ -81,10 +81,17 @@ namespace StoreDL
         //INVENTORY********************************************************INVENTORY
         public List<Inventory> GetInventories()
         {
-            return _context.Inventories
+            List<Inventory> invs = _context.Inventories
                 .AsNoTracking()
-                .Select(inventory => inventory)
+                .Select(inv => inv)
                 .ToList();
+
+            foreach (Inventory i in invs)
+            {
+                i.Product = GetProductById(i.ProductId);
+            }
+
+            return invs;
         }
         public void UpdateInventory(Inventory inv) { }
 
