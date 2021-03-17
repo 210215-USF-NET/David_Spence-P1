@@ -4,14 +4,14 @@
 }
 
 <div class="login-page">
-    @*<form>
+    <form>
             <label for="Name">Enter Your Name</label>
-            <input type="text" name="Name" class="form-control">
+            <input type="text" name="CName" class="form-control">
 
             <button class="btn btn-primary sMargin" type="submit" asp-controller="Customer" asp-action="Login">Login</button>
 
-        </form>*@
-    <form>
+        </form>
+    @*<form>
         <label for="CName">Choose a Customer:</label>
         <select id="CName" name="CName">
             <option value="David Spence">David Spence</option>
@@ -22,7 +22,7 @@
 
         </select>
         <input type="submit" asp-controller="Customer" asp-action="Login">
-    </form>
+    </form>*@
     <a asp-controller="Customer" asp-action="Create">New Customer?</a>
 
 
