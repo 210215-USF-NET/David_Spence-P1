@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,9 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using StoreDL;
 using StoreBL;
 using StoreMVC.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace StoreMVC
 {
@@ -32,11 +33,10 @@ namespace StoreMVC
             services.AddScoped<IStoreRepository, StoreRepoDB>();
             services.AddScoped<IStoreBL, StoreBL.StoreBL>();
             services.AddScoped<IMapper, Mapper>();
-            services.AddSession();
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(5);
+                options.IdleTimeout = TimeSpan.FromMinutes(3);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });

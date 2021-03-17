@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StoreModels;
+@using System.Text.Json;
+@model List<StoreModels.Order>
+
+@{
+    ViewData["Title"] = "OrderHistory";
+    List<OrderItem> items = JsonSerializer.Deserialize<List<OrderItem>>(Context.Session.GetString("orderItems"));
+}
+
+<h1>Order History</h1>
+
+
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <b>Order #@item.Id - @item.Date</b>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+                    Total Price: $@item.Price
+                </td>
+                <td></td>
+            </tr>
+            foreach (OrderItem itm in items)
+            {
+                if (itm.OrderId == item.Id)
+                {
+                    <tr>
+                        <td></td>
+                        <td>
+                            @itm.Product.Name
+                        </td>
+                        <td>
+                            Quantity: @itm.Quantity
+                        </td>
+                        <td>
+                            Price: $@itm.Product.Price 
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>

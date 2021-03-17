@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Http
+@using StoreModels;
+@using System.Text.Json;
+@{
+    ViewData["Title"] = "StoreSelector";
+    Customer customer = JsonSerializer.Deserialize<Customer>(Context.Session.GetString("customerData"));
+
+}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-3">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Store Selection</h1>
+        </div>
+    </div>
+</section>
+
+<div>
+    <div class="container">
+        <form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" method="post" asp-action="ProductView">
+            <input type="hidden" name="store" id="storeToPass" value="" />
+
+            <div class="col">
+                <button class="card shadow-sm" type="submit" onclick="send(1)">
+                    Fruit Town
+                </button>
+            </div>
+
+            <div class="col">
+                <button class="card shadow-sm" type="submit" onclick="send(2)">
+                    Ye Olde Fruit Store
+                </button>
+            </div>
+
+            <div class="col">
+                <button class="card shadow-sm" type="submit" onclick="send(3)">
+                    Le Frut
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    function send(value) {
+        document.getElementById("storeToPass").value = value
+    }
+</script>

@@ -7,7 +7,7 @@ namespace StoreModels
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Price { get; set; }
+        public int Price { get; set; }
         private void ThrowNullException()
         {
             Log.Logger = new LoggerConfiguration().WriteTo.File("../Logs/Logs.json").CreateLogger();

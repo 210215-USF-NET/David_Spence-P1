@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNetCore.Http;
+@using StoreModels;
+@using System.Text.Json;
+
+@model List<StoreModels.Cart>
+
+@{
+    ViewData["Title"] = "Cart";
+    Customer customer = JsonSerializer.Deserialize<Customer>(Context.Session.GetString("customerData"));
+    Location location = JsonSerializer.Deserialize<Location>(Context.Session.GetString("storeSelection"));
+    int totalPrice = 0;
+}
+
+<h1>Welcome to @location.Name</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Product
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price 
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Product.Name
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    $@item.Product.Price
+                </td>
+                
+                @{
+                    totalPrice += (item.Product.Price * item.Quantity);
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <div><b>Total Price:</b></div>
+                <div>$@totalPrice</div>
+            </td>
+            <td>
+                <form>
+                    <input hidden name="tp" value="@totalPrice" />
+                    <button class="btn btn-outline-dark" type="submit" asp-action="Checkout">
+                        Checkout
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>

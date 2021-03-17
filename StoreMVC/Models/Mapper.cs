@@ -44,6 +44,7 @@ namespace StoreMVC.Models
         {
             return new CustomerIndexVM
             {
+                Id = customer2BCasted.Id,
                 Name = customer2BCasted.Name,
                 Phone = customer2BCasted.Phone
             };

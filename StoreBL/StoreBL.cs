@@ -47,7 +47,7 @@ namespace StoreBL
         {
             return _repo.GetCustomerOrderHistory(custName);
         }
-    public List<Order> GetLocationOrderHistory(int locationId)
+        public List<Order> GetLocationOrderHistory(int locationId)
         {
             return _repo.GetLocationOrderHistory(locationId);
         }
@@ -56,13 +56,21 @@ namespace StoreBL
         {
             return _repo.GetInventories();
         }
-        public void UpdateInventory(Inventory inv)
+        public Inventory UpdateInventory(Inventory inv)
         {
-            _repo.UpdateInventory(inv);
+            return _repo.UpdateInventory(inv);
         }
-        public Inventory AddToCart(Inventory inv, Customer customer, int quantity)
+        public Inventory AddToCart(Inventory inv, Customer customer, string quantity)
         {
             return _repo.AddToCart(inv, customer, quantity);
+        }
+        public Inventory SubtractFromInventory(Inventory selectedInventory, int quantity)
+        {
+            return _repo.SubtractFromInventory(selectedInventory, quantity);
+        }
+        public Inventory AddInventory(Inventory newInv)
+        {
+            return _repo.AddInventory(newInv);
         }
         //PRODUCT***********************************************************PRODUCT
         public List<Product> GetProducts()
@@ -73,6 +81,10 @@ namespace StoreBL
         {
             return _repo.GetProductById(id);
         }
+        public Product GetProductById(string name)
+        {
+            return _repo.GetProductById(name);
+        }
         //CART**************************************************************CART
         public Cart AddCart(Cart newCart)
         {
@@ -81,6 +93,10 @@ namespace StoreBL
         public List<Cart> GetCarts()
         {
             return _repo.GetCarts();
+        }
+        public List<Cart> RemoveCart(List<Cart> cart)
+        {
+            return _repo.RemoveCart(cart);
         }
         //OrderItem********************************************************ORDERITEM
         public OrderItem AddOrderItem(OrderItem newOrderItem)
@@ -95,6 +111,12 @@ namespace StoreBL
         List<Order> IStoreBL.GetCustomerOrderHistory(string custName)
         {
             return _repo.GetCustomerOrderHistory(custName);
-        }        
+        }
+
+        public Product AddToCart(Product product, string quantity, Customer customer, Location location)
+        {
+            return _repo.AddToCart(product, quantity, customer, location);
+        }
+
     }
 }

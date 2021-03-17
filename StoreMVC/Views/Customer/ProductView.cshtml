@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Http
+    @using StoreModels;
+    @using System.Text.Json;
+    @{
+        ViewData["Title"] = "Browse Products";
+        Location l = JsonSerializer.Deserialize<Location>(Context.Session.GetString("storeSelection"));
+    }
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-3">
+            <div class="col-lg-6 col-md-8 mx-auto">
+            </div>
+        </div>
+    </section>
+
+    <div>
+        <div class="container">
+            <form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" asp-action="AddToCart">
+                <input type="hidden" name="cartProduct" id="ProductForCart" value="" />
+                {
+
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label><br>
+                <input type="radio" id="other" name="gender" value="other">
+                <label for="other">Other</label>
+                <input type="number" name="quantity" id="addCount">
+                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(3)">Add an Apple</button>
+
+
+                }
+            </form>
+        </div>
+    </div>
+    <a asp-controller="Customer" asp-action="Cart">Checkout</a>
+
+
+
+    <script>
+        function cartSubmit(value) {
+            document.getElementById("ProductForCart").value = value
+        }
+    </script>
