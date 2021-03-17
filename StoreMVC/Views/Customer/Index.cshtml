@@ -10,6 +10,13 @@
         <a asp-action="Create">Create New</a>
     </p>
 
+    <p>
+        @using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+        {
+            <ins>Customer Search:</ins> @Html.TextBox("search") <input type="submit" value="Search" />
+        }
+    </p>
+
     <table class="table">
         <thead>
             <tr>
@@ -35,18 +42,13 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Phone)
                     </td>
-                    <td>
+                    @*<td>
                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
+                    </td>*@
                 </tr>
             }
         </tbody>
     </table>
-    <p>
-        @using (Html.BeginForm("Index", "Customer", FormMethod.Get))
-        {
-            <ins>Customer Search:</ins> @Html.TextBox("search") <input type="submit" value="Search" />
-        }
-    </p>
+    

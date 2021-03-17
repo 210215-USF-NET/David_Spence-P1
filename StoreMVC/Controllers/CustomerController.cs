@@ -25,12 +25,12 @@ namespace StoreMVC.Controllers
             _mapper = mapper;
         }
         // GET: CustomerController
-        public ActionResult Index()
+       /* public ActionResult Index()
         {
             return View(_storeBL.GetCustomers().Select(customer => _mapper.cast2CustomerIndexVM(customer)).ToList());
-        }
+        }*/
 
-        public ActionResult Index(string search)
+       public ActionResult Index(string search)
         {
             if (search != null)
             {
