@@ -110,9 +110,16 @@ namespace StoreMVC.Controllers
 
         public ActionResult Login(string CName)
         {
+            if (CName.Equals("Manager"))
+            {
+                return View("ManagerPage");
+            }
+
             List<Customer> custList = _storeBL.GetCustomers().Select(customer => (customer)).ToList();
             foreach (var item in custList)
             {
+                
+
                 if (item.Name.ToString() == CName)
                 {
                     /*_customer = item;*/
@@ -141,10 +148,6 @@ namespace StoreMVC.Controllers
             _customer = JsonSerializer.Deserialize<Customer>(HttpContext.Session.GetString("customerData"));
             _location = JsonSerializer.Deserialize<Location>(HttpContext.Session.GetString("storeSelection"));
 
-            /*Inventory selectedInventory = _storeBL.GetInventories()
-                .FirstOrDefault(p =>
-                p.ProductId == int.Parse(cartProduct)
-                && p.LocationId == _location.Id);*/
             int cp = int.Parse(cartProduct);
 
             Product product = _storeBL.GetProductById(cp);
@@ -231,6 +234,21 @@ namespace StoreMVC.Controllers
         {
             _customer = JsonSerializer.Deserialize<Customer>(HttpContext.Session.GetString("customerData"));
             List<Order> orders = _storeBL.GetOrders().Where(o => o.CustomerId == _customer.Id).ToList();
+            List<OrderItem> items = _storeBL.GetOrderItems();
+            foreach (OrderItem i in items)
+            {
+                i.Product = _storeBL.GetProductById(i.ProductId);
+            }
+            HttpContext.Session.SetString("orderItems", JsonSerializer.Serialize(items));
+
+            return View(orders);
+
+        }
+
+        public ActionResult LocationOrderHistory()
+        {
+            _location = JsonSerializer.Deserialize<Location>(HttpContext.Session.GetString("locationData"));
+            List<Order> orders = _storeBL.GetOrders().Where(o => o.LocationId == _location.Id).ToList();
             List<OrderItem> items = _storeBL.GetOrderItems();
             foreach (OrderItem i in items)
             {

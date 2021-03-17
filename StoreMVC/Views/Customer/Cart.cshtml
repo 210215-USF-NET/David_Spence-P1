@@ -11,8 +11,18 @@
     int totalPrice = 0;
 }
 
+
+<style>
+    h1 {
+        text-align: center;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+
 <h1>Welcome to @location.Name</h1>
 
+</style>
 <table class="table">
     <thead>
         <tr>
@@ -23,9 +33,8 @@
                 Quantity
             </th>
             <th>
-                Price 
+                Price
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -41,7 +50,7 @@
                 <td>
                     $@item.Product.Price
                 </td>
-                
+
                 @{
                     totalPrice += (item.Product.Price * item.Quantity);
                 }
@@ -57,13 +66,15 @@
                 <div>$@totalPrice</div>
             </td>
             <td>
-                <form>
+                
                     <input hidden name="tp" value="@totalPrice" />
-                    <button class="btn btn-outline-dark" type="submit" asp-action="Checkout">
-                        Checkout
-                    </button>
-                </form>
+
             </td>
         </tr>
     </tbody>
 </table>
+<form>
+    <button class="btn btn-outline-dark" type="submit" asp-action="Checkout">
+        Checkout
+    </button>
+</form>

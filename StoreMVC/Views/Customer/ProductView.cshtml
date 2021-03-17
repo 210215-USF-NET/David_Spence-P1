@@ -15,21 +15,31 @@
 
     <div>
         <div class="container">
-            <form class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" asp-action="AddToCart">
+            <form class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-3" asp-action="AddToCart">
                 <input type="hidden" name="cartProduct" id="ProductForCart" value="" />
-                {
 
-                <input type="radio" id="male" name="gender" value="male">
-                <label for="male">Male</label><br>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label><br>
-                <input type="radio" id="other" name="gender" value="other">
-                <label for="other">Other</label>
-                <input type="number" name="quantity" id="addCount">
-                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(3)">Add an Apple</button>
+                <div class="row">
+                    <div class="col-12">
+                        How many?<input type="number" name="quantity" id="addCount">
+                    </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(1)">Grapes</button>
+            </div>
+                 
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(2)">Banana</button>
+            </div>
 
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(3)">Apple</button>
+            </div>
 
-                }
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-primary" onclick="cartSubmit(4)">Orange</button>
+            </div>
+
+            </div>
+                
             </form>
         </div>
     </div>

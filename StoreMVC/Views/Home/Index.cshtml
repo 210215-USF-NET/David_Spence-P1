@@ -1,14 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-
-@*    you have to include @using Microsoft.AspNetCore.Http;  in your view
-*@
-
-
 }
+
+
         <style>
             body {
                 background-image: url("plasticFruit.jpg");
+            }
+            .center {
+                text-align: center;
             }
         </style>
         <div class="text-center">
@@ -17,41 +17,4 @@
             <br />
             <a asp-controller="Customer" asp-action="Create">New Customer?</a>
 
-            @*<form asp-action="Login">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-fontrol" />
-                    <span asp-validation-for="Name" class=" text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Login" class="btn btn-primary" />
-                </div>
-            </form>*@
-
-
-
-
-
-
-
-            @*@using (Html.BeginForm("perform", "Login", FormMethod.Post))
-        {
-            <label for="Name">Customr Login:</label><br>
-            <input type="text" id="Name" name="Name" value='@ViewData["Name"]'><br>
-            <input type="submit" />
-        }*@
-
-
-            <!--
-                        Customer foundCustomer = storeBL.GetCustomerByName(Console.ReadLine());
-
-            <div class="form-group">
-    <label asp-for="Login:" class="control-label"></label>
-    <input asp-for="Name" class="form-control" />-->
-            @* <span asp-validation-for="Name" class="text-danger"></span>*@
-            <!--</div>
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-    </div>-->
         </div>
