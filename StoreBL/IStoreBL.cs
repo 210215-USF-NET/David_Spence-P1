@@ -32,7 +32,6 @@ namespace StoreBL
         List<Cart> GetCarts();
         List<Cart> RemoveCart(List<Cart> cart);
         Product AddToCart(Product product, string quantity, Customer customer, Location location);
-
         //OrderItem********************************************************ORDERITEM
         OrderItem AddOrderItem(OrderItem newOrderItem);
         List<OrderItem> GetOrderItems();
