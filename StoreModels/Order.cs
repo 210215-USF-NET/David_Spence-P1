@@ -17,7 +17,6 @@ namespace StoreModels
             this.Price += product.Price;
         }
 
-
         public override string ToString() => $"Order Details: \n\t Order #: {this.Id}";
 
     }
