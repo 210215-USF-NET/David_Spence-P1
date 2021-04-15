@@ -30,7 +30,8 @@ This is a ASP.NET Core MVC project utilizing Entity Framework Core to create a W
 
 ## Usage
 
+Once the program is running, feel free to explore the UI as desired. As a customer, you will need to create an account first to access the system. Once your account has been created and you have logged in, the expected functionalities of most web-based shopping sites should be available to you
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/210215-USF-NET/David_Spence-P1/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/210215-USF-NET/David_Spence-P1/blob/master/LICENSE).
